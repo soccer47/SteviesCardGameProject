@@ -41,4 +41,13 @@ public class CardDeck{
         cardsLeft = Deck.size();
     }
 
+    public void shuffleMet2(){
+        for (int i = Deck.size() - 1; i > 0; i--){
+            int randIndex = (int)(Math.random() * (i + 1);
+            Card holder = Deck.get(randIndex);
+            Deck.set(randIndex, Deck.get(i));
+            Deck.set(i, holder);
+        }
+    }
+
 }
