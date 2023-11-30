@@ -14,11 +14,16 @@ public class Player {
     public Player(String name, ArrayList<Card> hand){
         this.name = name;
         this.hand = hand;
+        this.points = 0;
     }
 
 
     public String getName(){
         return this.name;
+    }
+
+    public void setName(String newName){
+        this.name = newName;
     }
 
     public ArrayList<Card> getHand(){
