@@ -1,16 +1,31 @@
+import javax.swing.*;
+import java.awt.*;
+
 public class Card {
 
     // instance variables for Card class
     // declares the suit, rank, and value
     private String suit;
-    private String rank;
+    private int rank;
     private int value;
 
-    public Card(String suit, String rank, int value)
+    private Image cardImage;
+
+    private static final int CARD_WIDTH = 200;
+    private static final int CARD_HEIGHT = 315;
+
+    private static final int y = 250;
+
+    private BlackjackViewer game;
+
+    public Card(String suit, int rank, int value, Image card)
     {
         this.suit = suit;
         this.rank = rank;
         this.value = value;
+
+        // initialize an array of card images for each suit
+        cardImage = card;
     }
 
     // returns the suit of the card
@@ -19,7 +34,7 @@ public class Card {
     }
 
     // returns the rank of the card
-    public String getRank(){
+    public int getRank(){
         return this.rank;
     }
 
@@ -47,6 +62,10 @@ public class Card {
     // e.g. "Ace of Diamonds"
     public String toString(){
         return this.rank + " of " + this.suit;
+    }
+
+    public void draw(Graphics g, int x){
+        g.drawImage(cardImage, x + 30, y + 50, CARD_WIDTH, CARD_HEIGHT, game);
     }
 
 }
