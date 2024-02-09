@@ -1,69 +1,75 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Stevie K H
+// 2/9/2024
 public class Card {
-
-    // instance variables for Card class
-    // declares the suit, rank, and value
+    // Instance variables for Card class
+    // Declares the suit, rank, and value
     private String suit;
     private int rank;
     private int value;
 
     private Image cardImage;
 
-    private static final int CARD_WIDTH = 200;
-    private static final int CARD_HEIGHT = 315;
+    // Sets the cards width and height
+    private static final int CARD_WIDTH = 155;
+    private static final int CARD_HEIGHT = 230;
 
     private static final int y = 250;
 
     private BlackjackViewer game;
 
+    // Constructor
     public Card(String suit, int rank, int value, Image card)
     {
         this.suit = suit;
         this.rank = rank;
         this.value = value;
 
-        // initialize an array of card images for each suit
+        // Initializes the image that will be drawn in the window to represent the card
         cardImage = card;
     }
 
-    // returns the suit of the card
+    // Getter methods
+    // Returns the suit of the card
     public String getSuit(){
         return this.suit;
     }
 
-    // returns the rank of the card
+    // Returns the rank of the card
     public int getRank(){
         return this.rank;
     }
 
-    // returns the value of the card
+    // Returns the value of the card
     public int getValue(){
         return this.value;
     }
 
-    // sets the suit of the card to newSuit
+    // Setter methods
+    // Sets the suit of the card to newSuit
     public void setSuit(String newSuit){
         this.suit = newSuit;
     }
 
-    // sets the rank of the card to newRank
+    // Sets the rank of the card to newRank
     public void setRank(String newRank){
         this.suit = newRank;
     }
 
-    // sets the value of the card to newValue
+    // Sets the value of the card to newValue
     public void setValue(int newValue){
         this.value = newValue;
     }
 
-    // returns the rank and suit of the card
-    // e.g. "Ace of Diamonds"
+    // Returns the rank and suit of the card
+    // E.g. "Ace of Diamonds"
     public String toString(){
         return this.rank + " of " + this.suit;
     }
 
+    // Draw function that draws the card's image in the window at given x coordinate
     public void draw(Graphics g, int x){
         g.drawImage(cardImage, x + 30, y + 50, CARD_WIDTH, CARD_HEIGHT, game);
     }

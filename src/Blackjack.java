@@ -1,13 +1,17 @@
 import java.awt.*;
 import java.util.Scanner;
+
+// Stevie K H
+// 2/9/2024
 public class Blackjack {
 
-    // instance variables for Blackjack class
-    // declare player object and new deck object
+    // Instance variables for Blackjack class
+    // Declare player object and new deck object
     private Player P1;
     private final CardDeck theDeck;
-
     private BlackjackViewer window;
+
+    // Constructor
     public Blackjack(){
         // sets player name as an empty string
         P1 = new Player("");
@@ -17,6 +21,7 @@ public class Blackjack {
         int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
         theDeck = new CardDeck(ranks, suits, values);
 
+        // Creates a new BlackjackViewer object
         window = new BlackjackViewer(this);
     }
 
@@ -27,32 +32,32 @@ public class Blackjack {
     }
 
     public void playGame(){
-        // calls newGame method
+        // Calls newGame method
         newGame();
 
-        // forever loop that runs until player forfeits, wins, or loses
+        // Forever loop that runs until player forfeits, wins, or loses
         while (true) {
             Scanner k = new Scanner(System.in);
-            // gets player input
+            // Gets player input
             String input = k.nextLine();
 
-            // if a player types quit, stop loop and end game
+            // If a player types quit, stop loop and end game
             if (input.equals("quit")) {
                 System.out.println("You forfeited. Game Over.");
                 return;
             }
-            // if player types space then draw another card
+            // If player types space then draw another card
             else if (input.equals(" ")) {
-                // calls takeTurn method, which draws a card
+                // Calls takeTurn method, which draws a card
                 takeTurn();
-                // checks to see if player has won or lost
-                // if a player has won or lost, print message and then end game
-                // if player points equals 21, they win
+                // Checks to see if player has won or lost
+                // If a player has won or lost, print message and then end game
+                // If player points equals 21, they win
                 if (P1.getPoints() == 21){
                     System.out.println("You win, " + P1.getName() + "!");
                     return;
                 }
-                // if player points exceed 21, player loses
+                // If player points exceed 21, player loses
                 else if (P1.getPoints() > 21){
                     System.out.println("\nYou have exceeded 21 points, "
                                         + P1.getName() + ". You lose!");
@@ -63,33 +68,33 @@ public class Blackjack {
     }
 
     public void drawGame(){
-        // calls newGame method
+        // Calls newGame method
         newGame();
 
-        // forever loop that runs until player forfeits, wins, or loses
+        // Forever loop that runs until player forfeits, wins, or loses
         while (true) {
             Scanner k = new Scanner(System.in);
-            // gets player input
+            // Gets player input
             String input = k.nextLine();
 
-            // if a player types quit, stop loop and end game
+            // If a player types quit, stop loop and end game
             if (input.equals("quit")) {
                 P1.setGameOver();
                 System.out.println("You forfeited. Game Over.");
                 return;
             }
-            // if player types space then draw another card
+            // If player types space then draw another card
             else if (input.equals(" ")) {
-                // calls takeTurn method, which draws a card
+                // Calls takeTurn method, which draws a card
                 takeTurn();
-                // checks to see if player has won or lost
-                // if a player has won or lost, print message and then end game
-                // if player points equals 21, they win
+                // Checks to see if player has won or lost
+                // If a player has won or lost, print message in window and then end game
+                // If player points equals 21, they win
                 if (P1.getPoints() == 21){
                     System.out.println("You win, " + P1.getName() + "!");
                     return;
                 }
-                // if player points exceed 21, player loses
+                // If player points exceed 21, player loses
                 else if (P1.getPoints() > 21){
                     System.out.println("\nYou have exceeded 21 points, "
                             + P1.getName() + ". You lose!");
@@ -99,6 +104,7 @@ public class Blackjack {
         }
     }
 
+    // Getter methods for deck and player objects created in Blackjack constructor
     public CardDeck getDeck(){
         return theDeck;
     }
@@ -107,18 +113,19 @@ public class Blackjack {
     }
 
 
+    // Method for a single player turn
     public void takeTurn(){
-        // gets random card from deck
+        // Gets random card from deck
         Card newCard = theDeck.deal();
-        // adds the new card to the player's hand, adds card value to player total
+        // Adds the new card to the player's hand, adds card value to player total
         P1.addCard(newCard);
         P1.addPoints(newCard.getValue());
-        // prints what card the user drew
+        // Prints what card the user drew, redraws the window to show
         window.repaint();
     }
 
     public void newGame(){
-        // prints welcome message, gets player name
+        // Prints welcome message, gets player name
         System.out.print("Welcome to Blackjack!\n"
                 + "Please enter your name: ");
         Scanner h = new Scanner(System.in);
@@ -126,26 +133,11 @@ public class Blackjack {
         P1.setName(playerName);
     }
 
-    public void printInstructions(){
-        // prints game instructions
-        System.out.println();
-        System.out.println("Hello, " + P1.getName() + "!\n"
-                + "In Blackjack, you will play by yourself " +
-                "against the dealer.\n"
-                + "Each turn, you will draw a card, and the value of " +
-                "your card will be added to your total.\n"
-                + "You will draw cards until your total either " +
-                "equals or exceeds 21.\n"
-                + "If you total exceeds 21, the dealer wins.\n"
-                + "If you total equals 21, you win. \n"
-                + "After each turn, you can either press space to draw again, "
-                + "or type in 'quit' to forfeit");
-        System.out.println("Ready?\nPlay!\n\nPress space to draw...");
-    }
-
+    // Draws the game instructions in the window
     public void drawInstructions(Graphics g){
+        // Sets the font to new font "Serif"
         g.setFont(new Font("Serif", Font.PLAIN, 30));
-        // prints game instructions
+        // Prints game instructions
         g.drawString("Hello! "
                 + "In Blackjack, you will play by yourself " +
                 "against the dealer.", 100, 300);
@@ -158,8 +150,7 @@ public class Blackjack {
         g.drawString("win. After each turn, you can either press space to draw again, "
                 + "or type ", 100, 420);
         g.drawString("in 'quit' to forfeit", 100, 450);
-
-        g.drawString("Press space to draw a card", 100, 510);
+        g.drawString("Enter your name, then press space to draw a card", 100, 510);
     }
 
 }
